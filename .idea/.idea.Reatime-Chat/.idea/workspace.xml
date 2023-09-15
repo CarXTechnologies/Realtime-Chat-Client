@@ -9,13 +9,14 @@
   <component name="ChangeListManager">
     <list default="true" id="1927d8b3-f6fe-4909-9808-d119f4f5d6f1" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Realtime-Chat-Tests/Realtime-Chat-Tests.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Realtime-Chat.sln" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Reatime-Chat/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RealtimeChat.sln" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/RealtimeChat/Client/WebSocketClient.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealtimeChat/MainClass.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/RealtimeChat/Model/ChatMessage.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/RealtimeChat/RealtimeChat.csproj" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/RealtimeChat/Utils/JsonUtils.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TestConsole/Program.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TestConsole/TestConsole.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,9 +108,20 @@
         <option name="Build" />
       </method>
     </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue=".NET Project.TestConsole" />
       <item itemvalue=".NET Static Method.Unnamed" />
+      <item itemvalue="Attach to Unity Editor.Attach to Unity Editor" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -125,7 +137,7 @@
       <workItem from="1691412370698" duration="4300000" />
       <workItem from="1694588236452" duration="11887000" />
       <workItem from="1694609336156" duration="6670000" />
-      <workItem from="1694673914986" duration="9948000" />
+      <workItem from="1694673914986" duration="13711000" />
     </task>
     <servers />
   </component>

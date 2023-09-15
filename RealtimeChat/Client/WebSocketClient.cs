@@ -1,82 +1,96 @@
 ﻿using System.Net.WebSockets;
 using System.Text;
-using Reatime_Chat.model;
-using Reatime_Chat.utils;
+using RealtimeChat.Model;
+using RealtimeChat.Utils;
 
-namespace Reatime_Chat.websocket;
+namespace RealtimeChat.Client;
 
 /// <summary>
 /// WebSocketClient API
 /// </summary>
 public class WebSocketClient
 {
-    private readonly ClientWebSocket _client;
-    private readonly string _baseUrl;
-    private readonly Action<ChatMessage> _doOnMessage;
-    private readonly Action<WebSocketReceiveResult> _doOnCloseStatus;
+    public Action<ChatMessage> MessageReceivedEvent;
+    public Action<WebSocketReceiveResult> ConnectionClosedEvent;
     
-    private const string AuthHeaderName = "Authorization";
+    private readonly ClientWebSocket m_client;
+    private readonly string m_baseUrl;
+    private readonly string m_token;
 
+    private const string AuthHeaderName = "Authorization";
 
     /// <summary>
     /// WebSocketClient constructor
     /// </summary>
     /// <param name="host">host of chat server</param>
     /// <param name="port">port of chat server</param>
-    /// <param name="doOnMessage">action on receiving new message</param>
-    /// <param name="doOnCloseStatus">action on receiving close signal from server</param>
-    public WebSocketClient(string host, int port, Action<ChatMessage> doOnMessage,
-        Action<WebSocketReceiveResult> doOnCloseStatus)
+    /// <param name="messageReceivedEvent">action on receiving new message</param>
+    /// <param name="connectionClosedEvent">action on receiving close signal from server</param>
+    /// <param name="token">player access token</param>
+    public WebSocketClient(string host, int port, string token)
     {
-        _client = new ClientWebSocket();
-        _baseUrl = $"ws://{host}:{port}/chat/";
-        _doOnMessage = doOnMessage;
-        _doOnCloseStatus = doOnCloseStatus;
+        m_client = new ClientWebSocket();
+        m_baseUrl = $"ws://{host}:{port}/chat/";
+        m_token = $"Bearer {token}";
     }
 
     /// <summary>
     /// Start connection to chat
     /// </summary>
     /// <param name="roomId">chat room ID</param>
-    /// <param name="token">player access token</param>
-    public async Task ConnectAsync(string roomId, string token)
+    public async Task ConnectAsync(string roomId)
     {
-        var uri = new Uri($"{_baseUrl}{roomId}");
-        _client.Options.SetRequestHeader(AuthHeaderName, $"Bearer {token}");
-        await _client.ConnectAsync(uri, CancellationToken.None);
+        var uri = new Uri($"{m_baseUrl}{roomId}");
+        m_client.Options.SetRequestHeader(AuthHeaderName, m_token);
+        await m_client.ConnectAsync(uri, CancellationToken.None);
     }
-    
+
+    /// <summary>
+    /// Sending message
+    /// </summary>
+    /// <param name="message">message text</param>
     public async Task SendAsync(string message)
     {
         var messageJson = JsonUtils.ToJson(new ChatMessage(message));
         var buffer = Encoding.UTF8.GetBytes(messageJson);
-        await _client.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text,
-            WebSocketMessageFlags.EndOfMessage,
+        await m_client.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true,
             CancellationToken.None);
-        Console.WriteLine("Sent: {0}", message);
     }
 
+    /// <summary>
+    /// Listening for new messages
+    /// </summary>
     public async Task ListenAsync()
     {
         var buffer = new byte[1024];
-        while (true)
+        while (m_client.State == WebSocketState.Open)
         {
-            var result = await _client.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+            var result = await m_client.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
             if (result.MessageType == WebSocketMessageType.Close)
             {
-                _doOnCloseStatus(result);
+                ConnectionClosedEvent(result);
                 break;
             }
 
             var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
             var objMessage = JsonUtils.FromJson<ChatMessage>(message);
 
-            _doOnMessage(objMessage);
+            if (objMessage == null)
+            {
+                continue;
+            }
+
+            MessageReceivedEvent(objMessage);
         }
     }
 
+    /// <summary>
+    /// Closing connection with chat
+    /// </summary>
+    /// <param name="status">close status</param>
+    /// <param name="reason">close reason</param>
     public async Task CloseAsync(WebSocketCloseStatus status, string reason)
     {
-        await _client.CloseAsync(status, reason, CancellationToken.None);
+        await m_client.CloseAsync(status, reason, CancellationToken.None);
     }
 }

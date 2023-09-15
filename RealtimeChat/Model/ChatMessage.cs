@@ -1,8 +1,11 @@
-﻿namespace Reatime_Chat.model;
+﻿namespace RealtimeChat.Model;
 
+/// <summary>
+/// Chat message model
+/// </summary>
 public class ChatMessage
 {
-    public ChatMessage(string text, string carxUserId = null, string userName = null, long? timestamp = null)
+    public ChatMessage(string text, string? carxUserId = null, string? userName = null, long? timestamp = null)
     {
         Text = text;
         CarxUserId = carxUserId;
@@ -10,8 +13,23 @@ public class ChatMessage
         Timestamp = timestamp;
     }
 
-    public string Text { get; set; }
-    public string CarxUserId { get; set; } 
-    public string UserName { get; set; }  
-    public long? Timestamp { get; set; } 
+    /// <summary>
+    /// Message text
+    /// </summary>
+    public string Text { get; }
+    
+    /// <summary>
+    /// UUID of player
+    /// </summary>
+    public string? CarxUserId { get; }
+    
+    /// <summary>
+    /// Player nickname
+    /// </summary>
+    public string? UserName { get; }
+    
+    /// <summary>
+    /// Message timestamp
+    /// </summary>
+    public long? Timestamp { get; }
 }
