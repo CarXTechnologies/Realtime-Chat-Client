@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtimeChat", "RealtimeChat\RealtimeChat.csproj", "{4955FA69-CC30-43AC-89FB-378852991259}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{93DAE4F2-07F5-43DF-A7E6-FD32E01AA5B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4955FA69-CC30-43AC-89FB-378852991259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4955FA69-CC30-43AC-89FB-378852991259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4955FA69-CC30-43AC-89FB-378852991259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4955FA69-CC30-43AC-89FB-378852991259}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93DAE4F2-07F5-43DF-A7E6-FD32E01AA5B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93DAE4F2-07F5-43DF-A7E6-FD32E01AA5B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93DAE4F2-07F5-43DF-A7E6-FD32E01AA5B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93DAE4F2-07F5-43DF-A7E6-FD32E01AA5B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
