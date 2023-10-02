@@ -10,7 +10,14 @@ namespace RealtimeChat.Client;
 /// </summary>
 public class WebSocketClient
 {
+    /// <summary>
+    /// Event when new message are received
+    /// </summary>
     public Action<ChatMessage> MessageReceivedEvent;
+    
+    /// <summary>
+    /// Event when connection are closed remotely 
+    /// </summary>
     public Action<WebSocketReceiveResult> ConnectionClosedEvent;
     
     private readonly ClientWebSocket m_client;
@@ -24,8 +31,6 @@ public class WebSocketClient
     /// </summary>
     /// <param name="host">host of chat server</param>
     /// <param name="port">port of chat server</param>
-    /// <param name="messageReceivedEvent">action on receiving new message</param>
-    /// <param name="connectionClosedEvent">action on receiving close signal from server</param>
     /// <param name="token">player access token</param>
     public WebSocketClient(string host, int port, string token)
     {
